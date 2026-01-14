@@ -85,6 +85,18 @@ router.put("/:id", protect, async (req, res) => {
   }
 });
 
+// DELETE ALL records
+router.delete("/", protect, async (req, res) => {
+  try {
+    await Record.deleteMany({});
+    res.status(200).json({ message: "All records deleted" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to delete all records" });
+  }
+});
+
+
 // DELETE record
 router.delete("/:id", protect, async (req, res) => {
   try {
